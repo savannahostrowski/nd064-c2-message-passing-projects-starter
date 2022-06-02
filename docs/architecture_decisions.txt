@@ -1,0 +1,4 @@
+The message passing strategies that would integrate well when refactoring into a microservice architecture are REST, gRPC, and Kafka. I’ve selected these strategies because:
+- REST is the industry standard meaning that there should be sufficient resources and developers at the company should be well-versed in this technology
+- gRPC is really fast (faster than REST) and will be ideal having the services of our application communicate
+- Kafka is ideal for handling the ingress of a large volume of data. It will help ensure that our application is performant and reliable by acting as a broker for location data.
