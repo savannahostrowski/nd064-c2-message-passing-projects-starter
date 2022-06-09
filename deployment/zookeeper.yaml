@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: location-zookeeper
+  name: location-zookeeper
+  namespace: kafka
+spec:
+  ports:
+  - name: zookeeper-port-5000
+    port: 5000
+    targetPort: 5000
+    nodePort: 30004
+  selector:
+    app: zookeeper
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: zookeeper-deployment
+  name: zookeeper-deployment
+  namespace: kafka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: zookeeper-deployment
+  template:
+    metadata:
+      labels:
+        service: zookeeper-deployment
+    spec:
+      containers:
+      - image: zookeeper
+        name: zookeeper
+        imagePullPolicy: Always
+      restartPolicy: Always
+
