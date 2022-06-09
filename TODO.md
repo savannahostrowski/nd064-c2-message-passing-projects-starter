@@ -1,6 +1,6 @@
-- [ ] Figure out dockerfiles (one per module)
+- [x] Figure out dockerfiles (one per module)
 - [ ] Confirm that the location producer/consumer is working 
-- [ ] Refactor the person/connection service
+- [x] Refactor the person/connection service
 - [ ] Add exception handling to the person/connection service (405 for bad API method)
 - [ ] Ensure that the GET/DELETE requests are returning 202s for success (and returning no result)
 - [ ] Confirm that the persons/connections service is working correctly
