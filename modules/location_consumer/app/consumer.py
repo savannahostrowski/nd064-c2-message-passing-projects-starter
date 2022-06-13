@@ -1,14 +1,16 @@
 import location_pb2 
 from kafka import KafkaConsumer
-from app import db
+from flask_sqlalchemy import SQLAlchemy
 from geoalchemy2.functions import ST_Point
+from models import Location
+import logging
 
-from modules.location_consumer.app.udaconnect.models import Location
-
+logging.basicConfig(level=logging.DEBUG)
 TOPIC_NAME = 'location'
-KAFKA_SERVER = 'kafka.default.svc.cluster.local'
-consumer = KafkaConsumer(TOPIC_NAME, bootstrap_servers=KAFKA_SERVER)
+KAFKA_SERVER = '10.42.0.56:9092'
+consumer = KafkaConsumer(TOPIC_NAME, bootstrap_servers=[KAFKA_SERVER])
 
+db = SQLAlchemy()
 while True:
     try:
         for message in consumer:
