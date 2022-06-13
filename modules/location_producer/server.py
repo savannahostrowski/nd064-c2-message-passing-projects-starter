@@ -15,7 +15,7 @@ class LocationServicer(location_pb2_grpc.LocationServiceServicer):
             "longitude": str(request.longitude)
         }
        kafka_topic = 'locations'
-       kafka_server = 'localhost:9892'
+       kafka_server = '10.42.0.56:9092'
        producer = KafkaProducer(bootstrap_servers=kafka_server)
        producer.send(kafka_topic, json.dumps(request_value).encode())
        producer.flush()
@@ -24,8 +24,8 @@ class LocationServicer(location_pb2_grpc.LocationServiceServicer):
 server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))
 location_pb2_grpc.add_LocationServiceServicer_to_server(LocationServicer(), server)
 
-print("Server starting on port 5005...")
-server.add_insecure_port("[::]:5005")
+print("Server starting on port 5001...")
+server.add_insecure_port("[::]:5001")
 server.start()
 
 # To keep the thread alive...
