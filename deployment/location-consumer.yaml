@@ -6,10 +6,10 @@ metadata:
   name: location-consumer
 spec:
   ports:
-  - name: "5000"
-    port: 5002
-    targetPort: 5002
-    nodePort: 30003
+  - name: "5004"
+    port: 5004
+    targetPort: 5004
+    nodePort: 30006
   selector:
     service: location-consumer
   type: NodePort
@@ -31,33 +31,18 @@ spec:
         service: location-consumer
     spec:
       containers:
-      - image: seaquenched/location-consumer
+      - image: seaquenched/udaconnect-location-consumer
         name: location-consumer
         imagePullPolicy: Always
         env:
-        - name: DB_USERNAME
+        - name: KAFKA_URL
           valueFrom:
             configMapKeyRef:
-              name: db-env
-              key: DB_USERNAME
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: db-secret
-              key: DB_PASSWORD
-        - name: DB_NAME
+              name: locations-cf
+              key: KAFKA_URL
+        - name: KAFKA_TOPIC
           valueFrom:
             configMapKeyRef:
-              name: db-env
-              key: DB_NAME
-        - name: DB_HOST
-          valueFrom:
-            configMapKeyRef:
-              name: db-env
-              key: DB_HOST
-        - name: DB_PORT
-          valueFrom:
-            configMapKeyRef:
-              name: db-env
-              key: DB_PORT
+              name: locations-cf
+              key: KAFKA_TOPIC
       restartPolicy: Always
