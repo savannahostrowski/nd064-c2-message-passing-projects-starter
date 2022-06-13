@@ -1,4 +1,5 @@
 from datetime import datetime
+import logging
 
 from app.udaconnect.models import Person
 from app.udaconnect.schemas import (
@@ -14,9 +15,9 @@ from typing import Optional, List
 DATE_FORMAT = "%Y-%m-%d"
 
 api = Namespace("UdaConnect", description="Connections via geolocation.")  # noqa
+logging.basicConfig(level=logging.DEBUG)
 
-
-# TODO: This needs better exception handling
+logging.debug('This will get logged')
 
 @api.route("/persons")
 class PersonsResource(Resource):
