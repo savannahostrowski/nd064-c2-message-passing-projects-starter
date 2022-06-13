@@ -7,7 +7,7 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 TOPIC_NAME = 'location'
-KAFKA_SERVER = '10.42.0.56:9092'
+KAFKA_SERVER = '10.42.0.77:9092'
 consumer = KafkaConsumer(TOPIC_NAME, bootstrap_servers=[KAFKA_SERVER])
 
 db = SQLAlchemy()
